@@ -13,6 +13,4 @@ java:
 	mv A6/ java/
 
 .PHONY: compiled
-
-
 compiled: lua java
