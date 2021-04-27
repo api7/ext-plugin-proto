@@ -12,6 +12,16 @@
     <description>
         The proto and generated code files used by APISIX's external plugin mechanism
     </description>
+    <developers>
+        <developer>
+            <id>membphis</id>
+            <name>Yuansheng Wang</name>
+            <email>membphis@gmail.com</email>
+            <roles>
+                <role>maintainer</role>
+            </roles>
+        </developer>
+    </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
