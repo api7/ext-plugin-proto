@@ -91,10 +91,10 @@ table Stop {
 }
 table Rewrite {
     path:string;
+    // To delete a request header, use a TextEntry without Value
+    // To change the upstream host, use a TextEntry with Name equals to `host`
     headers:[TextEntry];
-    // Note that args are modified in full.
-    // Either empty, meaning no args need to be moved
-    // or the entire modified args, not the incrementally changed parts
+    // To delete an argument, use a TextEntry without Value
     args:[TextEntry];
 }
 
