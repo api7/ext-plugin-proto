@@ -59,6 +59,11 @@ table Resp {
 namespace A6.PrepareConf;
 
 table Req {
+    // The configuration for each plugins run in the runner
+    // The name is the plugin name while the value is the JSON encoded plugin configuration,
+    // like:
+    // {name: "echo", value: '{"body":"blah","headers":[]}'}
+    // The order of plugin execution is the same as the order of plugin name in this array.
     conf:[TextEntry];
 }
 
@@ -69,6 +74,7 @@ table Resp {
 namespace A6.HTTPReqCall;
 
 table Req {
+    // The id is for debug. It will be recycled when the number is exhausted
     id:uint32;
 
     src_ip:[ubyte];
