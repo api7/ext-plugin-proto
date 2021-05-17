@@ -4,8 +4,6 @@ lua:
 	rm -rf lua/A6
 	mv A6/ lua/
 
-.PHONY: compiled
-
 .PHONY: java
 java:
 	flatc --java ext-plugin.fbs
@@ -13,5 +11,11 @@ java:
 	mv A6/ java/io.github.api7.A6/
 	find . -name "*.java" | xargs sed -i 's/A6/io.github.api7.A6/g'
 
+.PHONY: go
+go:
+	flatc --go ext-plugin.fbs
+	rm -rf go/A6
+	mv A6/ go/
+
 .PHONY: compiled
-compiled: lua java
+compiled: lua java go
