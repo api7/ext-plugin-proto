@@ -5,7 +5,7 @@ package HTTPReqCall
 import (
 	flatbuffers "github.com/google/flatbuffers/go"
 
-	A6 "A6"
+	A6 "github.com/api7/ext-plugin-proto/go/A6"
 )
 
 type Stop struct {

@@ -16,6 +16,7 @@ go:
 	flatc --go ext-plugin.fbs
 	rm -rf go/A6
 	mv A6/ go/
+	find . -name "*.go" | xargs sed -i 's|"A6"|"github.com/api7/ext-plugin-proto/go/A6"|g'
 
 .PHONY: compiled
 compiled: lua java go
