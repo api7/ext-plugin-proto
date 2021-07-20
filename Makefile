@@ -18,5 +18,11 @@ go:
 	mv A6/ go/
 	find . -name "*.go" | xargs sed -i 's|"A6"|"github.com/api7/ext-plugin-proto/go/A6"|g'
 
+.PHONY: python
+python:
+	flatc --python ext-plugin.fbs
+	rm -rf python/A6
+	mv A6/ python/
+
 .PHONY: compiled
-compiled: lua java go
+compiled: lua java go python
