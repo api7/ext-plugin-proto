@@ -13,6 +13,9 @@ function Stop.New()
     return o
 end
 function Stop.GetRootAsStop(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = Stop.New()
     o:Init(buf, n + offset)
@@ -53,6 +56,9 @@ function Stop_mt:Body(j)
         return self.view:Get(flatbuffers.N.Uint8, a + ((j-1) * 1))
     end
     return 0
+end
+function Stop_mt:BodyAsString(start, stop)
+    return self.view:VectorAsString(8, start, stop)
 end
 function Stop_mt:BodyLength()
     local o = self.view:Offset(8)

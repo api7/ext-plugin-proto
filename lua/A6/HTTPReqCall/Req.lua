@@ -13,6 +13,9 @@ function Req.New()
     return o
 end
 function Req.GetRootAsReq(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = Req.New()
     o:Init(buf, n + offset)
@@ -35,6 +38,9 @@ function Req_mt:SrcIp(j)
         return self.view:Get(flatbuffers.N.Uint8, a + ((j-1) * 1))
     end
     return 0
+end
+function Req_mt:SrcIpAsString(start, stop)
+    return self.view:VectorAsString(6, start, stop)
 end
 function Req_mt:SrcIpLength()
     local o = self.view:Offset(6)

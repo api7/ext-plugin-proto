@@ -13,6 +13,9 @@ function DataEntry.New()
     return o
 end
 function DataEntry.GetRootAsDataEntry(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = DataEntry.New()
     o:Init(buf, n + offset)
@@ -34,6 +37,9 @@ function DataEntry_mt:Value(j)
         return self.view:Get(flatbuffers.N.Uint8, a + ((j-1) * 1))
     end
     return 0
+end
+function DataEntry_mt:ValueAsString(start, stop)
+    return self.view:VectorAsString(6, start, stop)
 end
 function DataEntry_mt:ValueLength()
     local o = self.view:Offset(6)

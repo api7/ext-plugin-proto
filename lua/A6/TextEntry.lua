@@ -13,6 +13,9 @@ function TextEntry.New()
     return o
 end
 function TextEntry.GetRootAsTextEntry(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = TextEntry.New()
     o:Init(buf, n + offset)

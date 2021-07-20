@@ -13,6 +13,9 @@ function Rewrite.New()
     return o
 end
 function Rewrite.GetRootAsRewrite(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = Rewrite.New()
     o:Init(buf, n + offset)

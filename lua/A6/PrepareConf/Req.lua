@@ -13,6 +13,9 @@ function Req.New()
     return o
 end
 function Req.GetRootAsReq(buf, offset)
+    if type(buf) == "string" then
+        buf = flatbuffers.binaryArray.New(buf)
+    end
     local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)
     local o = Req.New()
     o:Init(buf, n + offset)
