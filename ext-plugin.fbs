@@ -59,6 +59,8 @@ table Resp {
 namespace A6.PrepareConf;
 
 table Req {
+    // the idempotent key
+    key:string;
     // The configuration for each plugins run in the runner
     // The name is the plugin name while the value is the JSON encoded plugin configuration,
     // like:
