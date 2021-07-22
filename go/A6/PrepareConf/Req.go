@@ -35,8 +35,16 @@ func (rcv *Req) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *Req) Conf(obj *A6.TextEntry, j int) bool {
+func (rcv *Req) Key() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
+	if o != 0 {
+		return rcv._tab.ByteVector(o + rcv._tab.Pos)
+	}
+	return nil
+}
+
+func (rcv *Req) Conf(obj *A6.TextEntry, j int) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		x := rcv._tab.Vector(o)
 		x += flatbuffers.UOffsetT(j) * 4
@@ -48,7 +56,7 @@ func (rcv *Req) Conf(obj *A6.TextEntry, j int) bool {
 }
 
 func (rcv *Req) ConfLength() int {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		return rcv._tab.VectorLen(o)
 	}
@@ -56,10 +64,13 @@ func (rcv *Req) ConfLength() int {
 }
 
 func ReqStart(builder *flatbuffers.Builder) {
-	builder.StartObject(1)
+	builder.StartObject(2)
+}
+func ReqAddKey(builder *flatbuffers.Builder, key flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(key), 0)
 }
 func ReqAddConf(builder *flatbuffers.Builder, conf flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(conf), 0)
+	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(conf), 0)
 }
 func ReqStartConfVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
 	return builder.StartVector(4, numElems, 4)
