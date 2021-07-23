@@ -24,5 +24,13 @@ python:
 	rm -rf python/A6
 	mv A6/ python/
 
+.PHONY: python-release
+python-release:
+	cd python && \
+	cp -rf A6/ a6pluginproto && \
+	python setup.py sdist && \
+	python setup.py sdist upload && \
+	rm -rf a6pluginproto* dist
+
 .PHONY: compiled
 compiled: lua java go python
