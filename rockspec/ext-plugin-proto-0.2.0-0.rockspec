@@ -1,8 +1,8 @@
 package = "ext-plugin-proto-main"
-version = "0.0-0"
+version = "0.2.0-0"
 source = {
    url = "git://github.com/api7/ext-plugin-proto",
-   branch = "main",
+   branch = "v0.2.0",
 }
 
 description = {
@@ -30,7 +30,6 @@ build = {
         ["A6.HTTPReqCall.Stop"] = "lua/A6/HTTPReqCall/Stop.lua",
         ["A6.Err.Code"] = "lua/A6/Err/Code.lua",
         ["A6.Err.Resp"] = "lua/A6/Err/Resp.lua",
-        -- remove them once flatbuffers has accepted our LuaJIT implementation
         ["flatbuffers"] = "lua/flatbuffers.lua",
         ["flatbuffers.compat"] = "lua/flatbuffers/compat.lua",
         ["flatbuffers.compat_5_1"] = "lua/flatbuffers/compat_5_1.lua",
@@ -42,3 +41,4 @@ build = {
         ["flatbuffers.view"] = "lua/flatbuffers/view.lua",
     }
 }
+
