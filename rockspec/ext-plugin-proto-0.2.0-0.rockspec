@@ -1,4 +1,4 @@
-package = "ext-plugin-proto-main"
+package = "ext-plugin-proto"
 version = "0.2.0-0"
 source = {
    url = "git://github.com/api7/ext-plugin-proto",
