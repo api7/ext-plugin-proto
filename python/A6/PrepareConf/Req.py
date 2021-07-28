@@ -25,15 +25,8 @@ class Req(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # Req
-    def Key(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            return self._tab.String(o + self._tab.Pos)
-        return None
-
-    # Req
     def Conf(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
@@ -46,25 +39,28 @@ class Req(object):
 
     # Req
     def ConfLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
 
     # Req
     def ConfIsNone(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         return o == 0
+
+    # Req
+    def Key(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return None
 
 def Start(builder): builder.StartObject(2)
 def ReqStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
-def AddKey(builder, key): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(key), 0)
-def ReqAddKey(builder, key):
-    """This method is deprecated. Please switch to AddKey."""
-    return AddKey(builder, key)
-def AddConf(builder, conf): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(conf), 0)
+def AddConf(builder, conf): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(conf), 0)
 def ReqAddConf(builder, conf):
     """This method is deprecated. Please switch to AddConf."""
     return AddConf(builder, conf)
@@ -72,6 +68,10 @@ def StartConfVector(builder, numElems): return builder.StartVector(4, numElems, 
 def ReqStartConfVector(builder, numElems):
     """This method is deprecated. Please switch to Start."""
     return StartConfVector(builder, numElems)
+def AddKey(builder, key): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(key), 0)
+def ReqAddKey(builder, key):
+    """This method is deprecated. Please switch to AddKey."""
+    return AddKey(builder, key)
 def End(builder): return builder.EndObject()
 def ReqEnd(builder):
     """This method is deprecated. Please switch to End."""

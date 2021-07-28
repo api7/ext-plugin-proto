@@ -15,29 +15,29 @@ public final class Req extends Table {
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
   public Req __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public String key() { int o = __offset(4); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer keyAsByteBuffer() { return __vector_as_bytebuffer(4, 1); }
-  public ByteBuffer keyInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 4, 1); }
   public io.github.api7.A6.TextEntry conf(int j) { return conf(new io.github.api7.A6.TextEntry(), j); }
-  public io.github.api7.A6.TextEntry conf(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
-  public int confLength() { int o = __offset(6); return o != 0 ? __vector_len(o) : 0; }
+  public io.github.api7.A6.TextEntry conf(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public int confLength() { int o = __offset(4); return o != 0 ? __vector_len(o) : 0; }
   public io.github.api7.A6.TextEntry.Vector confVector() { return confVector(new io.github.api7.A6.TextEntry.Vector()); }
-  public io.github.api7.A6.TextEntry.Vector confVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public io.github.api7.A6.TextEntry.Vector confVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(4); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public String key() { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer keyAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
+  public ByteBuffer keyInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
 
   public static int createReq(FlatBufferBuilder builder,
-      int keyOffset,
-      int confOffset) {
+      int confOffset,
+      int keyOffset) {
     builder.startTable(2);
-    Req.addConf(builder, confOffset);
     Req.addKey(builder, keyOffset);
+    Req.addConf(builder, confOffset);
     return Req.endReq(builder);
   }
 
   public static void startReq(FlatBufferBuilder builder) { builder.startTable(2); }
-  public static void addKey(FlatBufferBuilder builder, int keyOffset) { builder.addOffset(0, keyOffset, 0); }
-  public static void addConf(FlatBufferBuilder builder, int confOffset) { builder.addOffset(1, confOffset, 0); }
+  public static void addConf(FlatBufferBuilder builder, int confOffset) { builder.addOffset(0, confOffset, 0); }
   public static int createConfVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startConfVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addKey(FlatBufferBuilder builder, int keyOffset) { builder.addOffset(1, keyOffset, 0); }
   public static int endReq(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

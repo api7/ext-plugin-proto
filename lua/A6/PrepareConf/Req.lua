@@ -24,14 +24,8 @@ end
 function Req_mt:Init(buf, pos)
     self.view = flatbuffers.view.New(buf, pos)
 end
-function Req_mt:Key()
-    local o = self.view:Offset(4)
-    if o ~= 0 then
-        return self.view:String(o + self.view.pos)
-    end
-end
 function Req_mt:Conf(j)
-    local o = self.view:Offset(6)
+    local o = self.view:Offset(4)
     if o ~= 0 then
         local x = self.view:Vector(o)
         x = x + ((j-1) * 4)
@@ -42,16 +36,22 @@ function Req_mt:Conf(j)
     end
 end
 function Req_mt:ConfLength()
-    local o = self.view:Offset(6)
+    local o = self.view:Offset(4)
     if o ~= 0 then
         return self.view:VectorLen(o)
     end
     return 0
 end
+function Req_mt:Key()
+    local o = self.view:Offset(6)
+    if o ~= 0 then
+        return self.view:String(o + self.view.pos)
+    end
+end
 function Req.Start(builder) builder:StartObject(2) end
-function Req.AddKey(builder, key) builder:PrependUOffsetTRelativeSlot(0, key, 0) end
-function Req.AddConf(builder, conf) builder:PrependUOffsetTRelativeSlot(1, conf, 0) end
+function Req.AddConf(builder, conf) builder:PrependUOffsetTRelativeSlot(0, conf, 0) end
 function Req.StartConfVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
+function Req.AddKey(builder, key) builder:PrependUOffsetTRelativeSlot(1, key, 0) end
 function Req.End(builder) return builder:EndObject() end
 
 return Req -- return the module
