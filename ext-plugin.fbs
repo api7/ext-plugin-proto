@@ -59,14 +59,14 @@ table Resp {
 namespace A6.PrepareConf;
 
 table Req {
-    // the idempotent key
-    key:string;
     // The configuration for each plugins run in the runner
     // The name is the plugin name while the value is the JSON encoded plugin configuration,
     // like:
     // {name: "echo", value: '{"body":"blah","headers":[]}'}
     // The order of plugin execution is the same as the order of plugin name in this array.
     conf:[TextEntry];
+    // the idempotent key
+    key:string;
 }
 
 table Resp {
