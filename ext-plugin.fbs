@@ -88,8 +88,6 @@ table Req {
     headers:[TextEntry];
 
     conf_token:uint32;
-
-    extra_info:[DataEntry];
 }
 
 table Stop {
@@ -114,4 +112,28 @@ union Action {
 table Resp {
     id:uint32;
     action:Action;
+}
+
+namespace A6.ExtraInfo;
+
+table Var {
+    name:string;
+}
+
+table ReqBody {
+}
+
+union Info {
+    // Get the `ngx.var.name`
+    Var,
+    // Get the request body
+    ReqBody,
+}
+
+table Req {
+    info:Info;
+}
+
+table Resp {
+    result:[ubyte];
 }

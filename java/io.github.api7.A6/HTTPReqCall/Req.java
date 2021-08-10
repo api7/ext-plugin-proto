@@ -37,11 +37,6 @@ public final class Req extends Table {
   public io.github.api7.A6.TextEntry.Vector headersVector() { return headersVector(new io.github.api7.A6.TextEntry.Vector()); }
   public io.github.api7.A6.TextEntry.Vector headersVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(14); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
   public long confToken() { int o = __offset(16); return o != 0 ? (long)bb.getInt(o + bb_pos) & 0xFFFFFFFFL : 0L; }
-  public io.github.api7.A6.DataEntry extraInfo(int j) { return extraInfo(new io.github.api7.A6.DataEntry(), j); }
-  public io.github.api7.A6.DataEntry extraInfo(io.github.api7.A6.DataEntry obj, int j) { int o = __offset(18); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
-  public int extraInfoLength() { int o = __offset(18); return o != 0 ? __vector_len(o) : 0; }
-  public io.github.api7.A6.DataEntry.Vector extraInfoVector() { return extraInfoVector(new io.github.api7.A6.DataEntry.Vector()); }
-  public io.github.api7.A6.DataEntry.Vector extraInfoVector(io.github.api7.A6.DataEntry.Vector obj) { int o = __offset(18); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
 
   public static int createReq(FlatBufferBuilder builder,
       long id,
@@ -50,10 +45,8 @@ public final class Req extends Table {
       int pathOffset,
       int argsOffset,
       int headersOffset,
-      long conf_token,
-      int extra_infoOffset) {
-    builder.startTable(8);
-    Req.addExtraInfo(builder, extra_infoOffset);
+      long conf_token) {
+    builder.startTable(7);
     Req.addConfToken(builder, conf_token);
     Req.addHeaders(builder, headersOffset);
     Req.addArgs(builder, argsOffset);
@@ -64,7 +57,7 @@ public final class Req extends Table {
     return Req.endReq(builder);
   }
 
-  public static void startReq(FlatBufferBuilder builder) { builder.startTable(8); }
+  public static void startReq(FlatBufferBuilder builder) { builder.startTable(7); }
   public static void addId(FlatBufferBuilder builder, long id) { builder.addInt(0, (int)id, (int)0L); }
   public static void addSrcIp(FlatBufferBuilder builder, int srcIpOffset) { builder.addOffset(1, srcIpOffset, 0); }
   public static int createSrcIpVector(FlatBufferBuilder builder, byte[] data) { return builder.createByteVector(data); }
@@ -79,9 +72,6 @@ public final class Req extends Table {
   public static int createHeadersVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startHeadersVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static void addConfToken(FlatBufferBuilder builder, long confToken) { builder.addInt(6, (int)confToken, (int)0L); }
-  public static void addExtraInfo(FlatBufferBuilder builder, int extraInfoOffset) { builder.addOffset(7, extraInfoOffset, 0); }
-  public static int createExtraInfoVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
-  public static void startExtraInfoVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static int endReq(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;
