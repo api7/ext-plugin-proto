@@ -153,28 +153,8 @@ func (rcv *Req) MutateConfToken(n uint32) bool {
 	return rcv._tab.MutateUint32Slot(16, n)
 }
 
-func (rcv *Req) ExtraInfo(obj *A6.DataEntry, j int) bool {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(18))
-	if o != 0 {
-		x := rcv._tab.Vector(o)
-		x += flatbuffers.UOffsetT(j) * 4
-		x = rcv._tab.Indirect(x)
-		obj.Init(rcv._tab.Bytes, x)
-		return true
-	}
-	return false
-}
-
-func (rcv *Req) ExtraInfoLength() int {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(18))
-	if o != 0 {
-		return rcv._tab.VectorLen(o)
-	}
-	return 0
-}
-
 func ReqStart(builder *flatbuffers.Builder) {
-	builder.StartObject(8)
+	builder.StartObject(7)
 }
 func ReqAddId(builder *flatbuffers.Builder, id uint32) {
 	builder.PrependUint32Slot(0, id, 0)
@@ -205,12 +185,6 @@ func ReqStartHeadersVector(builder *flatbuffers.Builder, numElems int) flatbuffe
 }
 func ReqAddConfToken(builder *flatbuffers.Builder, confToken uint32) {
 	builder.PrependUint32Slot(6, confToken, 0)
-}
-func ReqAddExtraInfo(builder *flatbuffers.Builder, extraInfo flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(extraInfo), 0)
-}
-func ReqStartExtraInfoVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
-	return builder.StartVector(4, numElems, 4)
 }
 func ReqEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

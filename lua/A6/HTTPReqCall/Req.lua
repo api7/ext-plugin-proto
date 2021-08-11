@@ -105,25 +105,7 @@ function Req_mt:ConfToken()
     end
     return 0
 end
-function Req_mt:ExtraInfo(j)
-    local o = self.view:Offset(18)
-    if o ~= 0 then
-        local x = self.view:Vector(o)
-        x = x + ((j-1) * 4)
-        x = self.view:Indirect(x)
-        local obj = require('A6.DataEntry').New()
-        obj:Init(self.view.bytes, x)
-        return obj
-    end
-end
-function Req_mt:ExtraInfoLength()
-    local o = self.view:Offset(18)
-    if o ~= 0 then
-        return self.view:VectorLen(o)
-    end
-    return 0
-end
-function Req.Start(builder) builder:StartObject(8) end
+function Req.Start(builder) builder:StartObject(7) end
 function Req.AddId(builder, id) builder:PrependUint32Slot(0, id, 0) end
 function Req.AddSrcIp(builder, srcIp) builder:PrependUOffsetTRelativeSlot(1, srcIp, 0) end
 function Req.StartSrcIpVector(builder, numElems) return builder:StartVector(1, numElems, 1) end
@@ -134,8 +116,6 @@ function Req.StartArgsVector(builder, numElems) return builder:StartVector(4, nu
 function Req.AddHeaders(builder, headers) builder:PrependUOffsetTRelativeSlot(5, headers, 0) end
 function Req.StartHeadersVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
 function Req.AddConfToken(builder, confToken) builder:PrependUint32Slot(6, confToken, 0) end
-function Req.AddExtraInfo(builder, extraInfo) builder:PrependUOffsetTRelativeSlot(7, extraInfo, 0) end
-function Req.StartExtraInfoVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
 function Req.End(builder) return builder:EndObject() end
 
 return Req -- return the module

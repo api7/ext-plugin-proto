@@ -129,32 +129,7 @@ class Req(object):
             return self._tab.Get(flatbuffers.number_types.Uint32Flags, o + self._tab.Pos)
         return 0
 
-    # Req
-    def ExtraInfo(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
-        if o != 0:
-            x = self._tab.Vector(o)
-            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
-            x = self._tab.Indirect(x)
-            from A6.DataEntry import DataEntry
-            obj = DataEntry()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
-
-    # Req
-    def ExtraInfoLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
-        if o != 0:
-            return self._tab.VectorLen(o)
-        return 0
-
-    # Req
-    def ExtraInfoIsNone(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
-        return o == 0
-
-def Start(builder): builder.StartObject(8)
+def Start(builder): builder.StartObject(7)
 def ReqStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
@@ -198,14 +173,6 @@ def AddConfToken(builder, confToken): builder.PrependUint32Slot(6, confToken, 0)
 def ReqAddConfToken(builder, confToken):
     """This method is deprecated. Please switch to AddConfToken."""
     return AddConfToken(builder, confToken)
-def AddExtraInfo(builder, extraInfo): builder.PrependUOffsetTRelativeSlot(7, flatbuffers.number_types.UOffsetTFlags.py_type(extraInfo), 0)
-def ReqAddExtraInfo(builder, extraInfo):
-    """This method is deprecated. Please switch to AddExtraInfo."""
-    return AddExtraInfo(builder, extraInfo)
-def StartExtraInfoVector(builder, numElems): return builder.StartVector(4, numElems, 4)
-def ReqStartExtraInfoVector(builder, numElems):
-    """This method is deprecated. Please switch to Start."""
-    return StartExtraInfoVector(builder, numElems)
 def End(builder): return builder.EndObject()
 def ReqEnd(builder):
     """This method is deprecated. Please switch to End."""
