@@ -21,16 +21,15 @@ go:
 .PHONY: python
 python:
 	flatc --python ext-plugin.fbs
-	rm -rf python/A6
-	mv A6/ python/
+	rm -rf python/a6
+	mv A6/ python/a6
 
 .PHONY: python-release
 python-release:
 	cd python && \
-	cp -rf A6/ a6pluginproto && \
 	python setup.py sdist && \
 	python setup.py sdist upload && \
-	rm -rf a6pluginproto* dist
+	rm -rf a6pluginprotos* dist
 
 .PHONY: compiled
 compiled: lua java go python

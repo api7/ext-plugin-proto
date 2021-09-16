@@ -6,7 +6,8 @@ from setuptools import find_packages
 
 setup(
     name="a6pluginprotos",
-    version="0.1.0",
+    version="0.2.0",
+    python_requires=">=3.6",
     description="Proto of APISIX Python plugin runner.",
     license="Apache License 2.0",
     url="https://github.com/api7/ext-plugin-proto",
