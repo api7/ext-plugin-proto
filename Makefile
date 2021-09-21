@@ -31,5 +31,12 @@ python-release:
 	python setup.py sdist upload && \
 	rm -rf a6pluginprotos* dist
 
+.PHONY: typescript
+typescript:
+	flatc --ts ext-plugin.fbs
+	rm -rf typescript/
+	mkdir -p typescript
+	mv a6/ *.ts typescript/
+
 .PHONY: compiled
-compiled: lua java go python
+compiled: lua java go python typescript
