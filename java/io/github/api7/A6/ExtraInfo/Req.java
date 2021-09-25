@@ -19,11 +19,11 @@ public final class Req extends Table {
   public Table info(Table obj) { int o = __offset(6); return o != 0 ? __union(obj, o + bb_pos) : null; }
 
   public static int createReq(FlatBufferBuilder builder,
-      byte info_type,
+      byte infoType,
       int infoOffset) {
     builder.startTable(2);
     Req.addInfo(builder, infoOffset);
-    Req.addInfoType(builder, info_type);
+    Req.addInfoType(builder, infoType);
     return Req.endReq(builder);
   }
 

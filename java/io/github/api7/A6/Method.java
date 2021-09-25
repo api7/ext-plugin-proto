@@ -2,6 +2,7 @@
 
 package io.github.api7.A6;
 
+@SuppressWarnings("unused")
 public final class Method {
   private Method() { }
   public static final int GET = 0;
