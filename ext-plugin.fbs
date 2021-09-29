@@ -67,10 +67,11 @@ table Req {
     conf:[TextEntry];
     // the idempotent key
     key:string;
+    // the idempotent of conf
+    conf_token:uint32;
 }
 
 table Resp {
-    conf_token:uint32;
 }
 
 namespace A6.HTTPReqCall;
