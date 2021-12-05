@@ -21,8 +21,8 @@ go:
 .PHONY: python
 python:
 	flatc --python ext-plugin.fbs
-	rm -rf python/a6
-	mv A6/ python/a6
+	rm -rf python/A6
+	mv A6/ python/
 
 .PHONY: python-release
 python-release:
