@@ -81,7 +81,32 @@ class Rewrite(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         return o == 0
 
-def Start(builder): builder.StartObject(3)
+    # Rewrite
+    def RespHeaders(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+            x = self._tab.Indirect(x)
+            from A6.TextEntry import TextEntry
+            obj = TextEntry()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # Rewrite
+    def RespHeadersLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # Rewrite
+    def RespHeadersIsNone(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        return o == 0
+
+def Start(builder): builder.StartObject(4)
 def RewriteStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
@@ -105,6 +130,14 @@ def StartArgsVector(builder, numElems): return builder.StartVector(4, numElems, 
 def RewriteStartArgsVector(builder, numElems):
     """This method is deprecated. Please switch to Start."""
     return StartArgsVector(builder, numElems)
+def AddRespHeaders(builder, respHeaders): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(respHeaders), 0)
+def RewriteAddRespHeaders(builder, respHeaders):
+    """This method is deprecated. Please switch to AddRespHeaders."""
+    return AddRespHeaders(builder, respHeaders)
+def StartRespHeadersVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def RewriteStartRespHeadersVector(builder, numElems):
+    """This method is deprecated. Please switch to Start."""
+    return StartRespHeadersVector(builder, numElems)
 def End(builder): return builder.EndObject()
 def RewriteEnd(builder):
     """This method is deprecated. Please switch to End."""

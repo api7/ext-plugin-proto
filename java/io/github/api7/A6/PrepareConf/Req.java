@@ -6,7 +6,6 @@ import java.nio.*;
 import java.lang.*;
 import java.util.*;
 import com.google.flatbuffers.*;
-import io.github.api7.A6.TextEntry;
 
 @SuppressWarnings("unused")
 public final class Req extends Table {
@@ -16,11 +15,11 @@ public final class Req extends Table {
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
   public Req __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public TextEntry conf(int j) { return conf(new TextEntry(), j); }
-  public TextEntry conf(TextEntry obj, int j) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public io.github.api7.A6.TextEntry conf(int j) { return conf(new io.github.api7.A6.TextEntry(), j); }
+  public io.github.api7.A6.TextEntry conf(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int confLength() { int o = __offset(4); return o != 0 ? __vector_len(o) : 0; }
-  public TextEntry.Vector confVector() { return confVector(new TextEntry.Vector()); }
-  public TextEntry.Vector confVector(TextEntry.Vector obj) { int o = __offset(4); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public io.github.api7.A6.TextEntry.Vector confVector() { return confVector(new io.github.api7.A6.TextEntry.Vector()); }
+  public io.github.api7.A6.TextEntry.Vector confVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(4); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
   public String key() { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer keyAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
   public ByteBuffer keyInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }

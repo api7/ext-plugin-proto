@@ -66,12 +66,32 @@ function Rewrite_mt:ArgsLength()
     end
     return 0
 end
-function Rewrite.Start(builder) builder:StartObject(3) end
+function Rewrite_mt:RespHeaders(j)
+    local o = self.view:Offset(10)
+    if o ~= 0 then
+        local x = self.view:Vector(o)
+        x = x + ((j-1) * 4)
+        x = self.view:Indirect(x)
+        local obj = require('A6.TextEntry').New()
+        obj:Init(self.view.bytes, x)
+        return obj
+    end
+end
+function Rewrite_mt:RespHeadersLength()
+    local o = self.view:Offset(10)
+    if o ~= 0 then
+        return self.view:VectorLen(o)
+    end
+    return 0
+end
+function Rewrite.Start(builder) builder:StartObject(4) end
 function Rewrite.AddPath(builder, path) builder:PrependUOffsetTRelativeSlot(0, path, 0) end
 function Rewrite.AddHeaders(builder, headers) builder:PrependUOffsetTRelativeSlot(1, headers, 0) end
 function Rewrite.StartHeadersVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
 function Rewrite.AddArgs(builder, args) builder:PrependUOffsetTRelativeSlot(2, args, 0) end
 function Rewrite.StartArgsVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
+function Rewrite.AddRespHeaders(builder, respHeaders) builder:PrependUOffsetTRelativeSlot(3, respHeaders, 0) end
+function Rewrite.StartRespHeadersVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
 function Rewrite.End(builder) return builder:EndObject() end
 
 return Rewrite -- return the module

@@ -6,7 +6,6 @@ import java.nio.*;
 import java.lang.*;
 import java.util.*;
 import com.google.flatbuffers.*;
-import io.github.api7.A6.TextEntry;
 
 @SuppressWarnings("unused")
 public final class Rewrite extends Table {
@@ -19,29 +18,36 @@ public final class Rewrite extends Table {
   public String path() { int o = __offset(4); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer pathAsByteBuffer() { return __vector_as_bytebuffer(4, 1); }
   public ByteBuffer pathInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 4, 1); }
-  public TextEntry headers(int j) { return headers(new TextEntry(), j); }
-  public TextEntry headers(TextEntry obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public io.github.api7.A6.TextEntry headers(int j) { return headers(new io.github.api7.A6.TextEntry(), j); }
+  public io.github.api7.A6.TextEntry headers(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int headersLength() { int o = __offset(6); return o != 0 ? __vector_len(o) : 0; }
-  public TextEntry.Vector headersVector() { return headersVector(new TextEntry.Vector()); }
-  public TextEntry.Vector headersVector(TextEntry.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public TextEntry args(int j) { return args(new TextEntry(), j); }
-  public TextEntry args(TextEntry obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public io.github.api7.A6.TextEntry.Vector headersVector() { return headersVector(new io.github.api7.A6.TextEntry.Vector()); }
+  public io.github.api7.A6.TextEntry.Vector headersVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public io.github.api7.A6.TextEntry args(int j) { return args(new io.github.api7.A6.TextEntry(), j); }
+  public io.github.api7.A6.TextEntry args(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int argsLength() { int o = __offset(8); return o != 0 ? __vector_len(o) : 0; }
-  public TextEntry.Vector argsVector() { return argsVector(new TextEntry.Vector()); }
-  public TextEntry.Vector argsVector(TextEntry.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public io.github.api7.A6.TextEntry.Vector argsVector() { return argsVector(new io.github.api7.A6.TextEntry.Vector()); }
+  public io.github.api7.A6.TextEntry.Vector argsVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public io.github.api7.A6.TextEntry respHeaders(int j) { return respHeaders(new io.github.api7.A6.TextEntry(), j); }
+  public io.github.api7.A6.TextEntry respHeaders(io.github.api7.A6.TextEntry obj, int j) { int o = __offset(10); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public int respHeadersLength() { int o = __offset(10); return o != 0 ? __vector_len(o) : 0; }
+  public io.github.api7.A6.TextEntry.Vector respHeadersVector() { return respHeadersVector(new io.github.api7.A6.TextEntry.Vector()); }
+  public io.github.api7.A6.TextEntry.Vector respHeadersVector(io.github.api7.A6.TextEntry.Vector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
 
   public static int createRewrite(FlatBufferBuilder builder,
       int pathOffset,
       int headersOffset,
-      int argsOffset) {
-    builder.startTable(3);
+      int argsOffset,
+      int resp_headersOffset) {
+    builder.startTable(4);
+    Rewrite.addRespHeaders(builder, resp_headersOffset);
     Rewrite.addArgs(builder, argsOffset);
     Rewrite.addHeaders(builder, headersOffset);
     Rewrite.addPath(builder, pathOffset);
     return Rewrite.endRewrite(builder);
   }
 
-  public static void startRewrite(FlatBufferBuilder builder) { builder.startTable(3); }
+  public static void startRewrite(FlatBufferBuilder builder) { builder.startTable(4); }
   public static void addPath(FlatBufferBuilder builder, int pathOffset) { builder.addOffset(0, pathOffset, 0); }
   public static void addHeaders(FlatBufferBuilder builder, int headersOffset) { builder.addOffset(1, headersOffset, 0); }
   public static int createHeadersVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
@@ -49,6 +55,9 @@ public final class Rewrite extends Table {
   public static void addArgs(FlatBufferBuilder builder, int argsOffset) { builder.addOffset(2, argsOffset, 0); }
   public static int createArgsVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startArgsVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addRespHeaders(FlatBufferBuilder builder, int respHeadersOffset) { builder.addOffset(3, respHeadersOffset, 0); }
+  public static int createRespHeadersVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
+  public static void startRespHeadersVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static int endRewrite(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

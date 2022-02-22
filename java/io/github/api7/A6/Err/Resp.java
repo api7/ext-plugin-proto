@@ -2,13 +2,10 @@
 
 package io.github.api7.A6.Err;
 
-import com.google.flatbuffers.BaseVector;
-import com.google.flatbuffers.Constants;
-import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.flatbuffers.Table;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import java.nio.*;
+import java.lang.*;
+import java.util.*;
+import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class Resp extends Table {
@@ -28,7 +25,7 @@ public final class Resp extends Table {
   }
 
   public static void startResp(FlatBufferBuilder builder) { builder.startTable(1); }
-  public static void addCode(FlatBufferBuilder builder, int code) { builder.addByte(0, (byte) code, (byte) 0); }
+  public static void addCode(FlatBufferBuilder builder, int code) { builder.addByte(0, (byte)code, (byte)0); }
   public static int endResp(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

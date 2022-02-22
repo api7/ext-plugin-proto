@@ -83,8 +83,28 @@ func (rcv *Rewrite) ArgsLength() int {
 	return 0
 }
 
+func (rcv *Rewrite) RespHeaders(obj *A6.TextEntry, j int) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
+	if o != 0 {
+		x := rcv._tab.Vector(o)
+		x += flatbuffers.UOffsetT(j) * 4
+		x = rcv._tab.Indirect(x)
+		obj.Init(rcv._tab.Bytes, x)
+		return true
+	}
+	return false
+}
+
+func (rcv *Rewrite) RespHeadersLength() int {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
+	if o != 0 {
+		return rcv._tab.VectorLen(o)
+	}
+	return 0
+}
+
 func RewriteStart(builder *flatbuffers.Builder) {
-	builder.StartObject(3)
+	builder.StartObject(4)
 }
 func RewriteAddPath(builder *flatbuffers.Builder, path flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(path), 0)
@@ -99,6 +119,12 @@ func RewriteAddArgs(builder *flatbuffers.Builder, args flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(args), 0)
 }
 func RewriteStartArgsVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+	return builder.StartVector(4, numElems, 4)
+}
+func RewriteAddRespHeaders(builder *flatbuffers.Builder, respHeaders flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(3, flatbuffers.UOffsetT(respHeaders), 0)
+}
+func RewriteStartRespHeadersVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
 	return builder.StartVector(4, numElems, 4)
 }
 func RewriteEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {

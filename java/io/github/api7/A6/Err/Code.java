@@ -2,7 +2,6 @@
 
 package io.github.api7.A6.Err;
 
-@SuppressWarnings("unused")
 public final class Code {
   private Code() { }
   public static final int BAD_REQUEST = 0;
