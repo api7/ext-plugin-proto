@@ -102,6 +102,8 @@ table Rewrite {
     headers:[TextEntry];
     // To delete an argument, use a TextEntry without Value
     args:[TextEntry];
+    // To change the upstream response header
+    resp_headers:[TextEntry];
 }
 
 union Action {

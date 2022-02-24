@@ -2,10 +2,10 @@
 
 package io.github.api7.A6;
 
+import java.nio.*;
+import java.lang.*;
+import java.util.*;
 import com.google.flatbuffers.*;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 @SuppressWarnings("unused")
 public final class DataEntry extends Table {

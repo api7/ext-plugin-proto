@@ -34,9 +34,8 @@ python-release:
 .PHONY: typescript
 typescript:
 	flatc --ts ext-plugin.fbs
-	rm -rf typescript/
-	mkdir -p typescript
-	mv a6/ *.ts typescript/
+	rm -rf typescript/a6/
+	mv a6/ typescript/
 
 .PHONY: compiled
 compiled: lua java go python typescript

@@ -18,14 +18,14 @@ public final class Resp extends Table {
   public long confToken() { int o = __offset(4); return o != 0 ? (long)bb.getInt(o + bb_pos) & 0xFFFFFFFFL : 0L; }
 
   public static int createResp(FlatBufferBuilder builder,
-      long confToken) {
+      long conf_token) {
     builder.startTable(1);
-    Resp.addConfToken(builder, confToken);
+    Resp.addConfToken(builder, conf_token);
     return Resp.endResp(builder);
   }
 
   public static void startResp(FlatBufferBuilder builder) { builder.startTable(1); }
-  public static void addConfToken(FlatBufferBuilder builder, long confToken) { builder.addInt(0, (int) confToken, (int) 0L); }
+  public static void addConfToken(FlatBufferBuilder builder, long confToken) { builder.addInt(0, (int)confToken, (int)0L); }
   public static int endResp(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

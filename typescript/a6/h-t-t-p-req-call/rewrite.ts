@@ -50,8 +50,18 @@ argsLength():number {
   return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
 }
 
+respHeaders(index: number, obj?:TextEntry):TextEntry|null {
+  const offset = this.bb!.__offset(this.bb_pos, 10);
+  return offset ? (obj || new TextEntry()).__init(this.bb!.__indirect(this.bb!.__vector(this.bb_pos + offset) + index * 4), this.bb!) : null;
+}
+
+respHeadersLength():number {
+  const offset = this.bb!.__offset(this.bb_pos, 10);
+  return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
+}
+
 static startRewrite(builder:flatbuffers.Builder) {
-  builder.startObject(3);
+  builder.startObject(4);
 }
 
 static addPath(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset) {
@@ -90,16 +100,33 @@ static startArgsVector(builder:flatbuffers.Builder, numElems:number) {
   builder.startVector(4, numElems, 4);
 }
 
+static addRespHeaders(builder:flatbuffers.Builder, respHeadersOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(3, respHeadersOffset, 0);
+}
+
+static createRespHeadersVector(builder:flatbuffers.Builder, data:flatbuffers.Offset[]):flatbuffers.Offset {
+  builder.startVector(4, data.length, 4);
+  for (let i = data.length - 1; i >= 0; i--) {
+    builder.addOffset(data[i]!);
+  }
+  return builder.endVector();
+}
+
+static startRespHeadersVector(builder:flatbuffers.Builder, numElems:number) {
+  builder.startVector(4, numElems, 4);
+}
+
 static endRewrite(builder:flatbuffers.Builder):flatbuffers.Offset {
   const offset = builder.endObject();
   return offset;
 }
 
-static createRewrite(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset, headersOffset:flatbuffers.Offset, argsOffset:flatbuffers.Offset):flatbuffers.Offset {
+static createRewrite(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset, headersOffset:flatbuffers.Offset, argsOffset:flatbuffers.Offset, respHeadersOffset:flatbuffers.Offset):flatbuffers.Offset {
   Rewrite.startRewrite(builder);
   Rewrite.addPath(builder, pathOffset);
   Rewrite.addHeaders(builder, headersOffset);
   Rewrite.addArgs(builder, argsOffset);
+  Rewrite.addRespHeaders(builder, respHeadersOffset);
   return Rewrite.endRewrite(builder);
 }
 }

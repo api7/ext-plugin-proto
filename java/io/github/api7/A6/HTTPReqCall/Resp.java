@@ -21,17 +21,17 @@ public final class Resp extends Table {
 
   public static int createResp(FlatBufferBuilder builder,
       long id,
-      byte actionType,
+      byte action_type,
       int actionOffset) {
     builder.startTable(3);
     Resp.addAction(builder, actionOffset);
     Resp.addId(builder, id);
-    Resp.addActionType(builder, actionType);
+    Resp.addActionType(builder, action_type);
     return Resp.endResp(builder);
   }
 
   public static void startResp(FlatBufferBuilder builder) { builder.startTable(3); }
-  public static void addId(FlatBufferBuilder builder, long id) { builder.addInt(0, (int) id, (int) 0L); }
+  public static void addId(FlatBufferBuilder builder, long id) { builder.addInt(0, (int)id, (int)0L); }
   public static void addActionType(FlatBufferBuilder builder, byte actionType) { builder.addByte(1, actionType, 0); }
   public static void addAction(FlatBufferBuilder builder, int actionOffset) { builder.addOffset(2, actionOffset, 0); }
   public static int endResp(FlatBufferBuilder builder) {

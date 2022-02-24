@@ -2,7 +2,6 @@
 
 package io.github.api7.A6.HTTPReqCall;
 
-@SuppressWarnings("unused")
 public final class Action {
   private Action() { }
   public static final byte NONE = 0;
