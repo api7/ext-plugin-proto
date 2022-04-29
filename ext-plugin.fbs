@@ -139,3 +139,19 @@ table Req {
 table Resp {
     result:[ubyte];
 }
+
+namespace A6.HTTPRespCall;
+
+table Req {
+    id:uint32;
+    status:uint16;
+    headers:[TextEntry];
+    conf_token:uint32;
+}
+
+table Resp {
+    id:uint32;
+    status:uint16;
+    headers:[TextEntry];
+    body:[ubyte];
+}
