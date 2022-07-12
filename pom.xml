@@ -6,7 +6,7 @@
 
     <groupId>io.github.api7</groupId>
     <artifactId>A6</artifactId>
-    <version>0.3.0-RELEASE</version>
+    <version>0.4.0-RELEASE</version>
     <packaging>bundle</packaging>
     <name>APISIX Plugin Java API</name>
     <description>
