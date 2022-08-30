@@ -125,11 +125,16 @@ table Var {
 table ReqBody {
 }
 
+table RespBody {
+}
+
 union Info {
     // Get the `ngx.var.name`
     Var,
     // Get the request body
     ReqBody,
+    // Get the response body
+    RespBody,
 }
 
 table Req {

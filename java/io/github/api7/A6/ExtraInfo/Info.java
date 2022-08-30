@@ -2,13 +2,15 @@
 
 package io.github.api7.A6.ExtraInfo;
 
+@SuppressWarnings("unused")
 public final class Info {
   private Info() { }
   public static final byte NONE = 0;
   public static final byte Var = 1;
   public static final byte ReqBody = 2;
+  public static final byte RespBody = 3;
 
-  public static final String[] names = { "NONE", "Var", "ReqBody", };
+  public static final String[] names = { "NONE", "Var", "ReqBody", "RespBody", };
 
   public static String name(int e) { return names[e]; }
 }
