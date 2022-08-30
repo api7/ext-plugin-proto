@@ -6,4 +6,5 @@ class Info(object):
     NONE = 0
     Var = 1
     ReqBody = 2
+    RespBody = 3
 

@@ -7,21 +7,24 @@ import "strconv"
 type Info byte
 
 const (
-	InfoNONE    Info = 0
-	InfoVar     Info = 1
-	InfoReqBody Info = 2
+	InfoNONE     Info = 0
+	InfoVar      Info = 1
+	InfoReqBody  Info = 2
+	InfoRespBody Info = 3
 )
 
 var EnumNamesInfo = map[Info]string{
-	InfoNONE:    "NONE",
-	InfoVar:     "Var",
-	InfoReqBody: "ReqBody",
+	InfoNONE:     "NONE",
+	InfoVar:      "Var",
+	InfoReqBody:  "ReqBody",
+	InfoRespBody: "RespBody",
 }
 
 var EnumValuesInfo = map[string]Info{
-	"NONE":    InfoNONE,
-	"Var":     InfoVar,
-	"ReqBody": InfoReqBody,
+	"NONE":     InfoNONE,
+	"Var":      InfoVar,
+	"ReqBody":  InfoReqBody,
+	"RespBody": InfoRespBody,
 }
 
 func (v Info) String() string {
