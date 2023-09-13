@@ -84,7 +84,25 @@ function Rewrite_mt:RespHeadersLength()
     end
     return 0
 end
-function Rewrite.Start(builder) builder:StartObject(4) end
+function Rewrite_mt:Body(j)
+    local o = self.view:Offset(12)
+    if o ~= 0 then
+        local a = self.view:Vector(o)
+        return self.view:Get(flatbuffers.N.Uint8, a + ((j-1) * 1))
+    end
+    return 0
+end
+function Rewrite_mt:BodyAsString(start, stop)
+    return self.view:VectorAsString(12, start, stop)
+end
+function Rewrite_mt:BodyLength()
+    local o = self.view:Offset(12)
+    if o ~= 0 then
+        return self.view:VectorLen(o)
+    end
+    return 0
+end
+function Rewrite.Start(builder) builder:StartObject(5) end
 function Rewrite.AddPath(builder, path) builder:PrependUOffsetTRelativeSlot(0, path, 0) end
 function Rewrite.AddHeaders(builder, headers) builder:PrependUOffsetTRelativeSlot(1, headers, 0) end
 function Rewrite.StartHeadersVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
@@ -92,6 +110,8 @@ function Rewrite.AddArgs(builder, args) builder:PrependUOffsetTRelativeSlot(2, a
 function Rewrite.StartArgsVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
 function Rewrite.AddRespHeaders(builder, respHeaders) builder:PrependUOffsetTRelativeSlot(3, respHeaders, 0) end
 function Rewrite.StartRespHeadersVector(builder, numElems) return builder:StartVector(4, numElems, 4) end
+function Rewrite.AddBody(builder, body) builder:PrependUOffsetTRelativeSlot(4, body, 0) end
+function Rewrite.StartBodyVector(builder, numElems) return builder:StartVector(1, numElems, 1) end
 function Rewrite.End(builder) return builder:EndObject() end
 
 return Rewrite -- return the module

@@ -2,7 +2,6 @@
 
 package io.github.api7.A6.ExtraInfo;
 
-@SuppressWarnings("unused")
 public final class Info {
   private Info() { }
   public static final byte NONE = 0;

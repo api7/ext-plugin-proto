@@ -104,6 +104,8 @@ table Rewrite {
     args:[TextEntry];
     // To change the upstream response header
     resp_headers:[TextEntry];
+    // To change the request body
+    body:[ubyte];
 }
 
 union Action {

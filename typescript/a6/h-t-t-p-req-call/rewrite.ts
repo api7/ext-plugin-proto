@@ -60,8 +60,23 @@ respHeadersLength():number {
   return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
 }
 
+body(index: number):number|null {
+  const offset = this.bb!.__offset(this.bb_pos, 12);
+  return offset ? this.bb!.readUint8(this.bb!.__vector(this.bb_pos + offset) + index) : 0;
+}
+
+bodyLength():number {
+  const offset = this.bb!.__offset(this.bb_pos, 12);
+  return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
+}
+
+bodyArray():Uint8Array|null {
+  const offset = this.bb!.__offset(this.bb_pos, 12);
+  return offset ? new Uint8Array(this.bb!.bytes().buffer, this.bb!.bytes().byteOffset + this.bb!.__vector(this.bb_pos + offset), this.bb!.__vector_len(this.bb_pos + offset)) : null;
+}
+
 static startRewrite(builder:flatbuffers.Builder) {
-  builder.startObject(4);
+  builder.startObject(5);
 }
 
 static addPath(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset) {
@@ -116,17 +131,34 @@ static startRespHeadersVector(builder:flatbuffers.Builder, numElems:number) {
   builder.startVector(4, numElems, 4);
 }
 
+static addBody(builder:flatbuffers.Builder, bodyOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(4, bodyOffset, 0);
+}
+
+static createBodyVector(builder:flatbuffers.Builder, data:number[]|Uint8Array):flatbuffers.Offset {
+  builder.startVector(1, data.length, 1);
+  for (let i = data.length - 1; i >= 0; i--) {
+    builder.addInt8(data[i]!);
+  }
+  return builder.endVector();
+}
+
+static startBodyVector(builder:flatbuffers.Builder, numElems:number) {
+  builder.startVector(1, numElems, 1);
+}
+
 static endRewrite(builder:flatbuffers.Builder):flatbuffers.Offset {
   const offset = builder.endObject();
   return offset;
 }
 
-static createRewrite(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset, headersOffset:flatbuffers.Offset, argsOffset:flatbuffers.Offset, respHeadersOffset:flatbuffers.Offset):flatbuffers.Offset {
+static createRewrite(builder:flatbuffers.Builder, pathOffset:flatbuffers.Offset, headersOffset:flatbuffers.Offset, argsOffset:flatbuffers.Offset, respHeadersOffset:flatbuffers.Offset, bodyOffset:flatbuffers.Offset):flatbuffers.Offset {
   Rewrite.startRewrite(builder);
   Rewrite.addPath(builder, pathOffset);
   Rewrite.addHeaders(builder, headersOffset);
   Rewrite.addArgs(builder, argsOffset);
   Rewrite.addRespHeaders(builder, respHeadersOffset);
+  Rewrite.addBody(builder, bodyOffset);
   return Rewrite.endRewrite(builder);
 }
 }
